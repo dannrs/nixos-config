@@ -36,7 +36,7 @@
 	  };
 	  home-manager.users."dann".imports = [
 	    inputs.nix-flatpak.homeManagerModules.nix-flatpak
-	    ./user/home.nix
+	    ./home
 	  ];
 	}
       ];
