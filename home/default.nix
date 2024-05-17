@@ -1,13 +1,17 @@
-{ config, pkgs, ... }:
+{ config, pkgs, inputs, ... }:
 
 {
   imports = [
+    inputs.nix-flatpak.homeManagerModules.nix-flatpak
+    inputs.nix-colors.homeManagerModules.default
     ./modules
   ];
 
   home.username = "dann";
   home.homeDirectory = "/home/dann";
   home.stateVersion = "23.11"; # They say don't change it
+
+  colorScheme = inputs.nix-colors.colorSchemes.tokyo-night-dark;
 
   programs.git = {
     enable = true;

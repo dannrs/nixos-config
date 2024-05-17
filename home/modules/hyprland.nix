@@ -1,4 +1,7 @@
-{
+{ config, ... }:
+
+let theme = config.colorScheme.palette;
+in {
   wayland.windowManager.hyprland = {
     enable = true;
     xwayland.enable = true;
@@ -14,7 +17,7 @@
         "XDG_SESSION_DESKTOP,Hyprland"
         # "XCURSOR_SIZE,36"
         "QT_QPA_PLATFORM,wayland"
-        "XDG_SCREENSHOTS_DIR,~/screens"
+        "XDG_SCREENSHOTS_DIR,~/pictures/screenshots"
       ];
 
       debug = {
@@ -40,8 +43,8 @@
         gaps_in = 2;
         gaps_out = 5;
         border_size = 2;
-        "col.active_border" = "rgba(33ccffee) rgba(00ff99ee) 45deg";
-        "col.inactive_border" = "rgba(595959aa)";
+        "col.active_border" = "rgba(${theme.base0E}ff) rgba(${theme.base09}ff) 45deg";
+        "col.inactive_border" = "rgba(${theme.base06}cc)";
 
         layout = "dwindle";
 

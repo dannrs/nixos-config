@@ -1,5 +1,5 @@
 {
-  description = "flake config";
+  description = "dannrs flake config";
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
@@ -15,6 +15,7 @@
    };
 
    nix-flatpak.url = "github:gmodena/nix-flatpak";
+   nix-colors.url = "github:misterio77/nix-colors";
   };
 
   outputs = { self, nixpkgs, home-manager, ... }@inputs:
@@ -26,7 +27,7 @@
 	inherit inputs system;
       };
       modules = [ 
-        ./system/configuration.nix
+        ./system
         inputs.disko.nixosModules.disko
 	home-manager.nixosModules.home-manager {
 	  home-manager.useGlobalPkgs = true;
@@ -35,7 +36,6 @@
 	    inherit inputs;
 	  };
 	  home-manager.users."dann".imports = [
-	    inputs.nix-flatpak.homeManagerModules.nix-flatpak
 	    ./home
 	  ];
 	}

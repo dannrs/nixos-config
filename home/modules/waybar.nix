@@ -1,4 +1,7 @@
-{
+{ config, ... }:
+
+let theme = config.colorScheme.palette;
+in {
   programs.waybar = {
     enable = true;
     settings = {
@@ -113,19 +116,19 @@ window#waybar.empty #window {
     margin-right: 8px;
     border-radius: 10px;
     transition: none;
-    background: #383c4a;
+    background: #${theme.base02};
 }
 
 #workspaces button {
     transition: none;
-    color: #7c818c;
+    color: #${theme.base04};
     background: transparent;
     padding: 3px;
     font-size: 14px;
 }
 
 #workspaces button.persistent {
-    color: #7c818c;
+    color: #${theme.base04};
     font-size: 14px;
 }
 
@@ -135,20 +138,20 @@ window#waybar.empty #window {
     box-shadow: inherit;
     text-shadow: inherit;
     border-radius: inherit;
-    color: #383c4a;
-    background: #7c818c;
+    color: #${theme.base02};
+    background: #${theme.base04};
 }
 
 #workspaces button.active {
-    background: #4e5263;
+    background: #${theme.base03};
     color: white;
     border-radius: inherit;
 }
 
 #window {
     padding: 0 10px;
-    color: #ffffff;
-    background: #383c4a;
+    color: #${theme.base08};
+    background: #${theme.base02};
     border-radius: 10px;
     font-size: 12px;
 }
@@ -157,8 +160,8 @@ window#waybar.empty #window {
     padding: 0 10px;
     border-radius: 10px;
     transition: none;
-    color: #ffffff;
-    background: #383c4a;
+    color: #${theme.base08};
+    background: #${theme.base02};
     font-size: 12px;
 }
 
@@ -167,8 +170,8 @@ window#waybar.empty #window {
     padding: 0 10px;
     border-radius: 10px;
     transition: none;
-    color: #ffffff;
-    background: #383c4a;
+    color: #${theme.base08};
+    background: #${theme.base02};
     font-size: 12px;
 }
 
@@ -177,14 +180,14 @@ window#waybar.empty #window {
     padding: 0 10px;
     border-radius: 10px;
     transition: none;
-    color: #ffffff;
-    background: #383c4a;
+    color: #${theme.base08};
+    background: #${theme.base02};
     font-size: 12px;
 }
 
 #pulseaudio.muted {
-    background-color: #90b1b1;
-    color: #2a5c45;
+    background-color: #${theme.base08};
+    color: #${theme.base01};
 }
 
 #backlight {
@@ -192,8 +195,8 @@ window#waybar.empty #window {
     padding: 0 10px;
     border-radius: 10px;
     transition: none;
-    color: #ffffff;
-    background: #383c4a;
+    color: #${theme.base08};
+    background: #${theme.base02};
     font-size: 12px;
 }
 
@@ -202,24 +205,24 @@ window#waybar.empty #window {
     padding: 0 10px;
     border-radius: 10px;
     transition: none;
-    color: #ffffff;
-    background: #383c4a;
+    color: #${theme.base08};
+    background: #${theme.base02};
     font-size: 12px;
 }
 
 #battery.charging {
-    color: #ffffff;
-    background-color: #26A65B;
+    color: #${theme.base00};
+    background-color: #${theme.base0B};
 }
 
 #battery.warning:not(.charging) {
-    background-color: #ffbe61;
-    color: black;
+    background-color: #${theme.base0B};
+    color: #${theme.base00};
 }
 
 #battery.critical:not(.charging) {
-    background-color: #f53c3c;
-    color: #ffffff;
+    background-color: #${theme.base0F};
+    color: #${theme.base00};
     animation-name: blink;
     animation-duration: 0.5s;
     animation-timing-function: linear;
@@ -232,15 +235,15 @@ window#waybar.empty #window {
     padding: 0 10px;
     border-radius: 10px;
     transition: none;
-    color: #ffffff;
-    background: #383c4a;
+    color: #${theme.base08};
+    background: #${theme.base02};
     font-size: 12px;
 }
 
 @keyframes blink {
     to {
-        background-color: #ffffff;
-        color: #000000;
+        background-color: #${theme.base08};
+        color: #${theme.base02};
     }
 }
       '';
