@@ -7,7 +7,7 @@
 {
   imports =
     [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
+      ./hardware.nix
       ./../disko.nix
       ./modules
     ];
@@ -72,49 +72,6 @@
    };
 
    programs.fish.enable = true;
-
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
-  
-  nixpkgs.config.allowUnfree = true;
-  environment.systemPackages = with pkgs; [
-     neovim
-     pcmanfm
-     unzip
-     zip
-     p7zip
-     undmg
-     wget
-     lshw
-     home-manager
-     waybar
-     wl-clipboard
-     xwayland
-     firefox
-     hyprland
-     xdg-desktop-portal-hyprland
-     waybar
-     mako
-     wofi
-
-     # wallpapers
-     swww
-     swaybg
-     waypaper
-
-     # sound
-     pipewire
-     wireplumber
-     pamixer
-
-     polkit_gnome
-     font-manager
-
-     # dev
-     git
-     nodejs_20
-     gh
-   ];
 
   environment.etc."current-system-packages".text = let packages = builtins.map (p: "${p.name}") config.environment.systemPackages; sortedUnique = builtins.sort builtins.lessThan (pkgs.lib.lists.unique packages); formatted = builtins.concatStringsSep "\n" sortedUnique; in formatted;
 
