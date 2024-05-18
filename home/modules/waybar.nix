@@ -24,9 +24,9 @@ in {
 
     "clock" = {
         # timezone = "America/New_York";
-        format = "{:L%H:%M} 󰥔";
+        format = "{:%H:%M  %a}";
       	tooltip = true;
-	tooltip-format = "<big>{:%A, %d.%B %Y }</big><tt><small>{calendar}</small></tt>";
+        tooltip-format = "<big>{:%A, %d %B %Y }</big>\n<tt><small>{calendar}</small></tt>";
     };
 
     "network" = {
@@ -58,14 +58,12 @@ in {
             default = ["" "" ""];
         };
         on-click = "pavucontrol";
-        min-length = 13;
     };
 
     "backlight" = {
         device = "intel_backlight";
         format = "{percent}% {icon}";
         format-icons = [""];
-        min-length = 7;
     };
 
     battery = {
@@ -95,9 +93,8 @@ in {
     border: none;
     border-radius: 0;
     /* `otf-font-awesome` is required to be installed for icons */
-    font-family: JetBrains Mono;
+    font-family: Inter Display;
     font-weight: 600; 
-    min-height: 10px;
 }
 
 window#waybar {
@@ -109,12 +106,22 @@ window#waybar.hidden {
 }
 
 window#waybar.empty #window {
-    opacity: 0;
+    background: transparent;
+}
+
+tooltip {
+  background: #${theme.base02};
+	border: 0px solid #${theme.base0E};
+	border-radius: 12px;
+}
+
+tooltip label {
+	color: #${theme.base08};
 }
 
 #workspaces {
     margin-right: 8px;
-    border-radius: 10px;
+    border-radius: 12px;
     transition: none;
     background: #${theme.base02};
 }
@@ -123,7 +130,7 @@ window#waybar.empty #window {
     transition: none;
     color: #${theme.base04};
     background: transparent;
-    padding: 3px;
+    padding: 5px;
     font-size: 14px;
 }
 
@@ -144,45 +151,45 @@ window#waybar.empty #window {
 
 #workspaces button.active {
     background: #${theme.base03};
-    color: white;
+    color: #${theme.base08};
     border-radius: inherit;
 }
 
 #window {
-    padding: 0 10px;
+    padding: 5px 10px;
     color: #${theme.base08};
     background: #${theme.base02};
-    border-radius: 10px;
-    font-size: 12px;
+    border-radius: 12px;
+    font-size: 14px;
 }
 
 #clock {
-    padding: 0 10px;
-    border-radius: 10px;
+    padding: 5px 10px;
+    border-radius: 12px;
     transition: none;
     color: #${theme.base08};
     background: #${theme.base02};
-    font-size: 12px;
+    font-size: 13px;
 }
 
 #pulseaudio {
     margin-right: 8px;
-    padding: 0 10px;
-    border-radius: 10px;
+    padding: 5px 10px;
+    border-radius: 12px;
     transition: none;
     color: #${theme.base08};
     background: #${theme.base02};
-    font-size: 12px;
+    font-size: 13px;
 }
 
 #network {
     margin-right: 8px;
-    padding: 0 10px;
-    border-radius: 10px;
+    padding: 5px 10px;
+    border-radius: 12px;
     transition: none;
     color: #${theme.base08};
     background: #${theme.base02};
-    font-size: 12px;
+    font-size: 13px;
 }
 
 #pulseaudio.muted {
@@ -192,22 +199,22 @@ window#waybar.empty #window {
 
 #backlight {
     margin-right: 8px;
-    padding: 0 10px;
-    border-radius: 10px;
+    padding: 5px 10px;
+    border-radius: 12px;
     transition: none;
     color: #${theme.base08};
     background: #${theme.base02};
-    font-size: 12px;
+    font-size: 13px;
 }
 
 #battery {
     margin-right: 8px;
-    padding: 0 10px;
-    border-radius: 10px;
+    padding: 5px 10px;
+    border-radius: 12px;
     transition: none;
     color: #${theme.base08};
     background: #${theme.base02};
-    font-size: 12px;
+    font-size: 13px;
 }
 
 #battery.charging {
@@ -232,12 +239,12 @@ window#waybar.empty #window {
 
 #tray {
     margin-left: 8px;
-    padding: 0 10px;
-    border-radius: 10px;
+    padding: 5px 10px;
+    border-radius: 12px;
     transition: none;
     color: #${theme.base08};
     background: #${theme.base02};
-    font-size: 12px;
+    font-size: 13px;
 }
 
 @keyframes blink {

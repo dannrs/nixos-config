@@ -12,7 +12,7 @@ let theme = config.colorScheme.palette;
       borderSize = 0;
       borderRadius = 0;
       defaultTimeout = 5000;
-      font = "SF Pro Display Regular 10";
+      font = "Inter Display Regular 10";
       layer = "overlay";
       sort = "-time";
     };

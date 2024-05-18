@@ -43,8 +43,8 @@ in {
         gaps_in = 2;
         gaps_out = 5;
         border_size = 2;
-        "col.active_border" = "rgba(${theme.base0E}ff) rgba(${theme.base09}ff) 45deg";
-        "col.inactive_border" = "rgba(${theme.base06}cc)";
+        "col.active_border" = "rgba(${theme.base0E}FF) rgba(${theme.base09}FF) 45deg";
+        "col.inactive_border" = "rgba(${theme.base04}4D)";
 
         layout = "dwindle";
 
@@ -59,16 +59,16 @@ in {
           size = 5;
           passes = 3;
           new_optimizations = true;
-	  ignore_opacity = true;
+          ignore_opacity = true;
         };
       };
 
       animations = {
         enabled = true;
 
-	bezier = [
-	  "wind, 0.05, 0.9, 0.1, 1.05"
-	];
+        bezier = [
+          "wind, 0.05, 0.9, 0.1, 1.05"
+        ];
 
         animation = [
           "windows,     1, 7,  wind"
@@ -113,6 +113,7 @@ in {
       exec-once = [
         "waypaper --restore"
         "waybar"
+        "xsetroot -cursor_name left_ptr"
         "wl-paste --type text --watch cliphist store"
         "wl-paste --type image --watch cliphist store"
       ];

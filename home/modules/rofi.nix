@@ -7,7 +7,7 @@ in {
 programs.rofi = {
   enable = true;
   package = pkgs.rofi-wayland;
-  font = "SF Pro Display Regular 10";
+  font = "Inter Display Regular 11";
   location = "center";
   cycle = true;
   extraConfig = {
