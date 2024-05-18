@@ -95,6 +95,7 @@ in {
     /* `otf-font-awesome` is required to be installed for icons */
     font-family: Inter Display;
     font-weight: 600; 
+    min-height: 15px;
 }
 
 window#waybar {
@@ -131,12 +132,12 @@ tooltip label {
     color: #${theme.base04};
     background: transparent;
     padding: 5px;
-    font-size: 14px;
+    font-size: 13px;
 }
 
 #workspaces button.persistent {
     color: #${theme.base04};
-    font-size: 14px;
+    font-size: 13px;
 }
 
 /* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
@@ -156,7 +157,7 @@ tooltip label {
 }
 
 #window {
-    padding: 5px 10px;
+    padding: 0px 10px;
     color: #${theme.base08};
     background: #${theme.base02};
     border-radius: 12px;
@@ -164,7 +165,7 @@ tooltip label {
 }
 
 #clock {
-    padding: 5px 10px;
+    padding: 0px 10px;
     border-radius: 12px;
     transition: none;
     color: #${theme.base08};
@@ -174,7 +175,7 @@ tooltip label {
 
 #pulseaudio {
     margin-right: 8px;
-    padding: 5px 10px;
+    padding: 0px 10px;
     border-radius: 12px;
     transition: none;
     color: #${theme.base08};
@@ -184,7 +185,7 @@ tooltip label {
 
 #network {
     margin-right: 8px;
-    padding: 5px 10px;
+    padding: 0px 10px;
     border-radius: 12px;
     transition: none;
     color: #${theme.base08};
@@ -199,7 +200,7 @@ tooltip label {
 
 #backlight {
     margin-right: 8px;
-    padding: 5px 10px;
+    padding: 0px 10px;
     border-radius: 12px;
     transition: none;
     color: #${theme.base08};
@@ -209,7 +210,7 @@ tooltip label {
 
 #battery {
     margin-right: 8px;
-    padding: 5px 10px;
+    padding: 0px 10px;
     border-radius: 12px;
     transition: none;
     color: #${theme.base08};
@@ -239,7 +240,7 @@ tooltip label {
 
 #tray {
     margin-left: 8px;
-    padding: 5px 10px;
+    padding: 0px 10px;
     border-radius: 12px;
     transition: none;
     color: #${theme.base08};
