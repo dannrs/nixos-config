@@ -125,7 +125,7 @@ in {
         "$mainMod, E, exec, dolphin"
         "$mainMod, F, fullscreen"
         "$mainMod SHIFT, F, togglefloating"
-        "$mainMod, D, exec, wofi --show drun"
+        "$mainMod, D, exec, rofi -show drun"
         "$mainMod, P, pseudo, # dwindle"
         "$mainMod, S, togglesplit, # dwindle"
 
