@@ -7,6 +7,7 @@
     ./mako.nix
     ./rofi.nix
     ./starship.nix
+    ./text-editor.nix
     ./theming.nix
     ./waybar.nix
     ./wezterm.nix

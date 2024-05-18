@@ -5,22 +5,17 @@
   environment.systemPackages = with pkgs; [
      neovim
      pcmanfm
+     wget
+     lshw
+     home-manager
+     wl-clipboard
+     firefox
+     xdg-desktop-portal-hyprland
+
      unzip
      zip
      p7zip
      undmg
-     wget
-     lshw
-     home-manager
-     waybar
-     wl-clipboard
-     xwayland
-     firefox
-     hyprland
-     xdg-desktop-portal-hyprland
-     waybar
-     mako
-     wofi
 
      # wallpapers
      swww
@@ -38,8 +33,17 @@
 
      # dev
      git
+     gh
+     rustc
+     cargo
+     lua
+     luajitPackages.luarocks
      lazygit
      nodejs_20
-     gh
+
+     # cli tools
+     fd
+     ripgrep
+     zoxide
    ];
 }
