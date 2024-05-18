@@ -21,24 +21,31 @@
   outputs = { self, nixpkgs, home-manager, ... }@inputs:
     let
       system = "x86_64-linux";
+      pkgs = import nixpkgs {
+        inherit system;
+        config = {
+        allowUnfree = true;
+        };
+      };
     in {
     nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
       specialArgs = {
-	inherit inputs system;
+        inherit inputs system;
       };
       modules = [ 
         ./system
         inputs.disko.nixosModules.disko
-	home-manager.nixosModules.home-manager {
-	  home-manager.useGlobalPkgs = true;
-	  home-manager.useUserPackages = true;
-	  home-manager.extraSpecialArgs = {
-	    inherit inputs;
-	  };
-	  home-manager.users."dann".imports = [
-	    ./home
-	  ];
-	}
+        home-manager.nixosModules.home-manager {
+          home-manager.useGlobalPkgs = true;
+          home-manager.useUserPackages = true;
+          home-manager.extraSpecialArgs = {
+            inherit inputs;
+            inherit (inputs.nix-colors.lib-contrib {inherit pkgs;}) gtkThemeFromScheme;
+          };
+          home-manager.users."dann".imports = [
+            ./home
+          ];
+        }
       ];
     };
   };
