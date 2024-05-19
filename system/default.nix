@@ -19,7 +19,7 @@
   boot.loader.grub.efiSupport = true;
   # boot.loader.grub.efiInstallAsRemovable = true;
   boot.loader.grub.useOSProber = true;
-  boot.loader.grub.device = "nodev";
+  boot.loader.grub.devices = [ "nodev" ];
 
   networking.hostName = "nixos";
   # Pick only one of the below networking options.
@@ -42,25 +42,17 @@
   #   useXkbConfig = true; # use xkb.options in tty.
   # };
 
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
-
-  # Enable the X11 windowing system.
-  # services.xserver.enable = true;
-  
-
-  # Configure keymap in X11
-  # services.xserver.xkb.layout = "us";
-  # services.xserver.xkb.options = "eurosign:e,caps:escape";
-
-  # Enable CUPS to print documents.
-  # services.printing.enable = true;
-
-  # Enable sound.
-  # sound.enable = true;
-  # hardware.pulseaudio.enable = true;
-
-  # Enable touchpad support (enabled default in most desktopManager).
-  # services.xserver.libinput.enable = true;
+  nix = {
+    settings = {
+      auto-optimise-store = true;
+      experimental-features = [ "nix-command" "flakes" ];
+    };
+    gc = {
+      automatic = true;
+      dates = "weekly";
+      options = "--delete-older-than 7d";
+    };
+  };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.dann = {
