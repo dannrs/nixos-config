@@ -106,7 +106,7 @@ in {
       };
 
       windowrule = [
-        "float, ^(imv)$"
+        "maximize, ^(imv)$"
         "float, ^(mpv)$"
       ];
 
@@ -123,12 +123,16 @@ in {
         "$mainMod, Return, exec, wezterm"
         "$mainMod, Q, killactive,"
         "$mainMod SHIFT, M, exit,"
-        "$mainMod, E, exec, dolphin"
+        "$mainMod, E, exec, pcmanfm"
         "$mainMod, F, fullscreen"
+        "$mainMod, M, fullscreen,1"
         "$mainMod SHIFT, F, togglefloating"
         "$mainMod, D, exec, rofi -show drun"
         "$mainMod, P, pseudo, # dwindle"
         "$mainMod, S, togglesplit, # dwindle"
+
+        "$mainMod, Escape, exec, hyprlock"
+        ", Print, exec, screenshot"
 
         # Move focus with mainMod + arrow keys
         "$mainMod, H, movefocus, l"
