@@ -22,6 +22,21 @@
     };
   };
 
+  xdg.mimeApps.defaultApplications = {
+    "image/jpeg" = [ "imv.desktop" ];
+    "image/png" = [ "imv.desktop" ];
+    "image/gif" = [ "imv.desktop" ];
+    "image/svg+xml" = [ "imv.desktop" ];
+    "image/webp" = [ "firefox.desktop" ];
+
+    "application/pdf" = [ "firefox.desktop" ];
+
+    "video/mp4" = [ "mpv.desktop "];
+    "video/x-matroska" = [ "mpv.desktop "];
+    "video/webm" = [ "mpv.desktop "];
+    "video/quicktime" = [ "mpv.desktop "];
+  };
+
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.
   home.file = {
