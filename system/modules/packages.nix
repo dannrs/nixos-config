@@ -42,6 +42,7 @@
      nodejs_20
 
      # cli tools
+     playerctl
      fd
      ripgrep
      zoxide

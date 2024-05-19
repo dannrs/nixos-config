@@ -2,7 +2,7 @@
 
 {
   home.packages = with pkgs; [
-    obsidian
+   obsidian imv mpv
    grim slurp swappy
   ];
 }
