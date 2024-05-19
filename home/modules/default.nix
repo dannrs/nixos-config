@@ -9,6 +9,7 @@
     ./mako.nix
     ./rofi.nix
     ./starship.nix
+    ./swappy.nix
     ./text-editor.nix
     ./waybar.nix
     ./wezterm.nix
