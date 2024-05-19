@@ -5,6 +5,7 @@
     ./flatpak.nix
     ./gtk-qt.nix
     ./hyprland.nix
+    ./hyprlock.nix
     ./mako.nix
     ./rofi.nix
     ./starship.nix
