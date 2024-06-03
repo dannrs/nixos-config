@@ -11,16 +11,12 @@
      wl-clipboard
      firefox
      xdg-desktop-portal-hyprland
+     libnotify
 
      unzip
      zip
      p7zip
      undmg
-
-     # wallpapers
-     swww
-     swaybg
-     waypaper
 
      # sound
      pipewire
@@ -42,9 +38,19 @@
      nodejs_20
 
      # cli tools
+     ntfs3g
+     brightnessctl
+     htop
      playerctl
      fd
      ripgrep
      zoxide
+
+     heroic
+     gnome.file-roller
    ];
+
+   programs = {
+    appimage.enable = true;
+  };
 }
