@@ -1,7 +1,8 @@
 { config, ... }:
-
-let theme = config.colorScheme.palette;
+let
+  theme = config.colorScheme.palette;
 in {
+  # Hyprland
   wayland.windowManager.hyprland = {
     enable = true;
     xwayland.enable = true;
@@ -47,8 +48,6 @@ in {
         "col.inactive_border" = "rgba(${theme.base04}4D)";
 
         layout = "dwindle";
-
-        no_cursor_warps = false;
       };
 
       decoration = {
@@ -58,7 +57,6 @@ in {
           enabled = true;
           size = 5;
           passes = 3;
-          new_optimizations = true;
           ignore_opacity = true;
         };
       };
@@ -111,7 +109,6 @@ in {
       ];
 
       exec-once = [
-        "waypaper --restore"
         "waybar"
         "xsetroot -cursor_name left_ptr"
         "wl-paste --type text --watch cliphist store"
@@ -202,6 +199,133 @@ in {
       bindm = [
         "$mainMod, mouse:272, movewindow"
         "$mainMod, mouse:273, resizewindow"
+      ];
+    };
+  };
+
+  # Hyprlock
+  programs.hyprlock = {
+    enable = true;
+    settings = {
+      general = {
+        disable_loading_bar = true;
+        no_fade_in = false;
+        grace = 0;
+      };
+      background = [
+        {
+          monitor = "";
+          path = "/home/dann/pictures/wallpapers/1.jpg";
+          blur_size = 5;
+          blur_passes = 3;
+          noise = "0.0117";
+          contrast = "0.8916";
+          brightness = "0.8172";
+          vibrancy = "0.1696";
+          vibrancy_darkness = "0.0";
+        }
+      ];
+      input-field = [
+        {
+          monitor = "";
+          size = "280, 35";
+          outline_thickness = 2;
+          dots_size = "0.2";
+          dots_spacing = "0.2";
+          dots_center = true;
+          outer_color = "rgba(0, 0, 0, 0)";
+          inner_color = "rgba(0, 0, 0, 0.5)";
+          font_color = "rgb(200, 200, 200)";
+          fade_on_empty = false;
+          font_family = "Inter Display Light";
+          placeholder_text = "<i><span foreground='##cdd6f4'>Input Password...</span></i>";
+          hide_input = false;
+          position = "0, -140";
+          halign = "center";
+          valign = "center";
+        }
+      ];
+      label = [
+        { 
+          monitor = "";
+          text = "$TIME";
+          color = "rgba(255, 255, 255, 0.6)";
+          font_size = 60;
+          font_family = "Inter ExtraBold";
+          position = "0, -280";
+          halign = "center";
+          valign = "top";
+        }
+        {
+          monitor = "";
+          text = ''
+            cmd[update:1000] echo "$(date +"%d %B %Y")"
+          '';
+          color = "rgba(255, 255, 255, 0.6)";
+          font_size = 14;
+          font_family = "Inter Display Medium";
+          position = "0, -370";
+          halign = "center";
+          valign = "top";
+        }
+        {
+          monitor = "";
+          text = "Hi there, $USER 👋";
+          color = "rgba(255, 255, 255, 0.6)";
+          font_size = 12;
+          font_family = "Inter Display Medium";
+          position = "0, -95";
+          halign = "center";
+          valign = "center";
+        }
+      ];
+    };
+  };
+
+  # Hypridle
+  services.hypridle = {
+    enable = true;
+    settings = {
+      general = {
+        lock_cmd = "pidof hyprlock || hyprlock";
+        before_sleep_cmd = "loginctl lock-session";
+        after_sleep_cmd = "hyprctl dispatch dpms on";
+      };
+
+      listener = [
+        {
+          timeout = 180;
+          on-timeout = "brightnessctl -s set 10";
+          on-resume = "brightnessctl -r";
+        }
+        {
+          timeout = 480;
+          on-timeout = "loginctl lock-session";
+        }
+        {
+          timeout = 1200;
+          on-timeout = "hyprctl dispatch dpms off";
+          on-resume = "hyprctl dispatch dpms on";
+        }
+        {
+          timeout = 1800;
+          on-timeout = "systemctl suspend";
+        }
+      ];
+    };
+  };
+
+  # Hyprpaper
+  services.hyprpaper = {
+    enable = true;
+    settings = {
+      ipc = "off";
+      splash = false;
+      preload = [
+        "/home/dann/pictures/wallpapers/1.jpg"
+      ];
+      wallpaper = [
+        "eDP-1, /home/dann/pictures/wallpapers/1.jpg"
       ];
     };
   };
