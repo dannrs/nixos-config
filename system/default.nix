@@ -14,12 +14,16 @@
 
   # Use the systemd-boot EFI boot loader.
   # boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
-  boot.loader.grub.enable = true;
-  boot.loader.grub.efiSupport = true;
-  # boot.loader.grub.efiInstallAsRemovable = true;
-  boot.loader.grub.useOSProber = true;
-  boot.loader.grub.devices = [ "nodev" ];
+  boot.supportedFilesystems = [ "ntfs" ];
+  boot.loader = {
+    efi.canTouchEfiVariables = true;
+    grub = {
+      enable = true;
+      efiSupport = true;
+      useOSProber = true;
+      devices = [ "nodev" ];
+    };
+  };
 
   networking.hostName = "nixos";
   # Pick only one of the below networking options.

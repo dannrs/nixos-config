@@ -42,7 +42,7 @@ in {
     "pulseaudio" = {
         # scroll-step = 1; # %, can be a float
         reverse-scrolling = 1;
-        format = "{volume}% {icon} {format_source}";
+        format = "{volume}% {icon}  {format_source}";
         format-bluetooth = "{volume}% {icon} {format_source}";
         format-bluetooth-muted = " {icon} {format_source}";
         format-muted = " {format_source}";
@@ -81,7 +81,7 @@ in {
 
     tray = {
         icon-size = 16;
-        spacing = 0;
+        spacing = 4;
     };
 
       };
@@ -122,7 +122,7 @@ tooltip label {
 
 #workspaces {
     margin-right: 8px;
-    border-radius: 12px;
+    border-radius: 15px;
     transition: none;
     background: #${theme.base02};
 }
