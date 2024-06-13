@@ -108,11 +108,19 @@ in {
         "float, ^(mpv)$"
       ];
 
+      windowrulev2 = [
+        "workspace 3 silent, class:(obsidian)"
+        "workspace 9 silent, class:(discord)"
+        "workspace 10 silent, class:(Spotify)"
+      ];
+
       exec-once = [
         "waybar"
         "xsetroot -cursor_name left_ptr"
         "wl-paste --type text --watch cliphist store"
         "wl-paste --type image --watch cliphist store"
+        "[workspace 3 silent] obsidian"
+        "[workspace 9 silent] flatpak run com.discordapp.Discord"
       ];
 
       bind = [

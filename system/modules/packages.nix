@@ -1,53 +1,62 @@
 { pkgs, ... }:
 
+let
+  new-note = import ./scripts/new-note.nix { inherit pkgs; };
+in 
 {
   nixpkgs.config.allowUnfree = true;
   environment.systemPackages = with pkgs; [
-     neovim
-     pcmanfm
-     wget
-     lshw
-     home-manager
-     wl-clipboard
-     firefox
-     xdg-desktop-portal-hyprland
-     libnotify
+    new-note
+    neovim
+    pcmanfm
+    wget
+    lshw
+    home-manager
+    wl-clipboard
+    firefox
+    xdg-desktop-portal-hyprland
+    libnotify
 
-     unzip
-     zip
-     p7zip
-     undmg
+    unzip
+    zip
+    p7zip
+    undmg
 
-     # sound
-     pipewire
-     wireplumber
-     pamixer
-     pavucontrol
+    # sound
+    pipewire
+    wireplumber
+    pamixer
+    pavucontrol
 
-     polkit_gnome
-     font-manager
+    polkit_gnome
+    font-manager
 
-     # dev
-     git
-     gh
-     rustc
-     cargo
-     lua
-     luajitPackages.luarocks
-     lazygit
-     nodejs_20
+    # dev
+    git
+    gh
+    rustc
+    cargo
+    glibc
+    zig
+    lua
+    stylua
+    luajitPackages.luarocks
+    lazygit
 
-     # cli tools
-     ntfs3g
-     brightnessctl
-     htop
-     playerctl
-     fd
-     ripgrep
-     zoxide
+    nodejs_20
+    bun
+    turso-cli
 
-     heroic
-     gnome.file-roller
+    # cli tools
+    ntfs3g
+    brightnessctl
+    htop
+    playerctl
+    fd
+    ripgrep
+
+    heroic
+    gnome.file-roller
    ];
 
    programs = {

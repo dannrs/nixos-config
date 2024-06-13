@@ -2,9 +2,10 @@
 
 {
   home.packages = with pkgs; [
-   obsidian imv mpv
-   grim slurp swappy
-   zed-editor
-   lutris
+    brave
+    obsidian imv mpv
+    grim slurp swappy
+    zed-editor
+    lutris
   ];
 }

@@ -24,6 +24,11 @@
       hms = "home-manager switch --flake ${flakeDir}";
 
       v = "nvim";
+      vf = "nvim (fzf)";
+
+      nx = "cd nixos";
+      pr = "cd documents/projects";
+      nt = "cd documents/notes";
     };
   };
 }
