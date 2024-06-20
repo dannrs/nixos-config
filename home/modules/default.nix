@@ -3,6 +3,7 @@
     ./packages.nix
     ./fish.nix
     ./flatpak.nix
+    ./foot.nix
     ./fzf.nix
     ./gtk-qt.nix
     ./hypr.nix

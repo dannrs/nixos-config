@@ -125,7 +125,7 @@ in {
 
       bind = [
         "$mainMod, V, exec, cliphist list | wofi --dmenu | cliphist decode | wl-copy"
-        "$mainMod, Return, exec, wezterm"
+        "$mainMod, Return, exec, foot"
         "$mainMod, Q, killactive,"
         "$mainMod SHIFT, M, exit,"
         "$mainMod, E, exec, pcmanfm"
