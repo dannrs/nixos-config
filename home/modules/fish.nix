@@ -14,21 +14,25 @@
       # pnpm end
     '';
 
-    shellAliases =
-      let
-        flakeDir = "~/nixos";
-      in {
+    shellAliases = let
+      flakeDir = "~/nixos";
+    in {
       rb = "sudo nixos-rebuild switch --flake ${flakeDir}";
       upd = "nix flake update ${flakeDir}";
       upg = "sudo nixos-rebuild switch --upgrade --flake ${flakeDir}";
       hms = "home-manager switch --flake ${flakeDir}";
 
+      t = "tmux";
+      ta = "tmux attach";
+      td = "tmux detach";
+      tl = "tmux ls";
+
       v = "nvim";
       vf = "nvim (fzf)";
 
-      nx = "cd nixos";
-      pr = "cd documents/projects";
-      nt = "cd documents/notes";
+      nx = "cd && cd nixos";
+      pr = "cd && cd documents/projects";
+      nt = "cd && cd documents/notes";
     };
   };
 }

@@ -1,11 +1,18 @@
-{ config, ... }:
-let
+{config, ...}: let
   theme = config.colorScheme.palette;
 in {
   # Hyprland
   wayland.windowManager.hyprland = {
     enable = true;
-    xwayland.enable = true;
+
+    systemd = {
+      enable = false;
+      variables = ["--all"];
+      extraCommands = [
+        "systemctl --user stop graphical-session.target"
+        "systemctl --user start graphical-session.target"
+      ];
+    };
 
     settings = {
       "$mainMod" = "SUPER";
@@ -19,6 +26,7 @@ in {
         # "XCURSOR_SIZE,36"
         "QT_QPA_PLATFORM,wayland"
         "XDG_SCREENSHOTS_DIR,~/pictures/screenshots"
+        "WLR_DRM_NO_ATOMIC,1"
       ];
 
       debug = {
@@ -29,7 +37,7 @@ in {
       input = {
         kb_layout = "us";
         # kb_variant = "lang";
-        # kb_options = "grp:caps_toggle";
+        kb_options = "ctrl:nocaps";
 
         follow_mouse = 1;
 
@@ -47,34 +55,39 @@ in {
         "col.active_border" = "rgba(${theme.base0E}FF) rgba(${theme.base09}FF) 45deg";
         "col.inactive_border" = "rgba(${theme.base04}4D)";
 
-        layout = "dwindle";
+        allow_tearing = true;
+        resize_on_border = true;
       };
 
       decoration = {
         rounding = 0;
-        drop_shadow = false;
+        shadow = {
+          enabled = false;
+        };
         blur = {
           enabled = true;
-          size = 5;
-          passes = 3;
-          ignore_opacity = true;
+          brightness = 1.0;
+          contrast = 1.0;
+          noise = 0.01;
+
+          vibrancy = 0.2;
+          vibrancy_darkness = 0.5;
+
+          passes = 4;
+          size = 7;
+
+          popups = true;
+          popups_ignorealpha = 0.2;
         };
       };
 
       animations = {
         enabled = true;
-
-        bezier = [
-          "wind, 0.05, 0.9, 0.1, 1.05"
-        ];
-
         animation = [
-          "windows,     1, 7,  wind"
-          "windowsOut,  1, 7,  default, popin 80%"
-          "border,      1, 10, default"
-          "borderangle, 1, 8,  default"
-          "fade,        1, 7,  default"
-          "workspaces,  1, 6,  default"
+          "border, 1, 2, default"
+          "fade, 1, 4, default"
+          "windows, 1, 3, default, popin 80%"
+          "workspaces, 1, 2, default, slide"
         ];
       };
 
@@ -84,34 +97,38 @@ in {
       };
 
       master = {
-        new_is_master = true;
+        new_status = "master";
       };
 
       gestures = {
         workspace_swipe = true;
-        workspace_swipe_fingers = 3;
         workspace_swipe_invert = false;
-        workspace_swipe_distance = 200;
         workspace_swipe_forever = true;
       };
 
       misc = {
-        animate_manual_resizes = true;
-        animate_mouse_windowdragging = true;
-        enable_swallow = true;
-        render_ahead_of_time = false;
         disable_hyprland_logo = true;
+        disable_autoreload = true;
+        force_default_wallpaper = 0;
+        vrr = 1;
       };
+
+      xwayland.force_zero_scaling = true;
 
       windowrule = [
         "maximize, ^(imv)$"
         "float, ^(mpv)$"
+        "float,^(.*.exe)$"
+        "float,^(steam_app_.*)$"
+        "float,^(steam_proton)$"
       ];
 
       windowrulev2 = [
         "workspace 3 silent, class:(obsidian)"
         "workspace 9 silent, class:(discord)"
         "workspace 10 silent, class:(Spotify)"
+        "immediate, class:^(.*.exe)$"
+        "immediate, class:^(steam_app_.*)$"
       ];
 
       exec-once = [
@@ -119,11 +136,11 @@ in {
         "xsetroot -cursor_name left_ptr"
         "wl-paste --type text --watch cliphist store"
         "wl-paste --type image --watch cliphist store"
-        "[workspace 3 silent] obsidian"
-        "[workspace 9 silent] flatpak run com.discordapp.Discord"
+        #"[workspace 9 silent] flatpak run com.discordapp.Discord"
       ];
 
       bind = [
+        "$mainMod SHIFT, E, exec, pkill Hyprland"
         "$mainMod, V, exec, cliphist list | wofi --dmenu | cliphist decode | wl-copy"
         "$mainMod, Return, exec, foot"
         "$mainMod, Q, killactive,"
@@ -138,6 +155,7 @@ in {
 
         "$mainMod, Escape, exec, hyprlock"
         ", Print, exec, screenshot"
+        "$mainMod, G, exec, gaming-mode"
 
         # Move focus with mainMod + arrow keys
         "$mainMod, H, movefocus, l"
@@ -190,12 +208,12 @@ in {
         ", XF86AudioLowerVolume, exec, pamixer -d 5 "
         ", XF86AudioMute, exec, pamixer -t"
         ", XF86AudioMicMute, exec, pamixer --default-source -m"
-        
+
         # Brightness control
         ", XF86MonBrightnessDown, exec, brightnessctl set 5%- "
         ", XF86MonBrightnessUp, exec, brightnessctl set +5% "
 
-	# Screenshots
+        # Screenshots
         '', Print, exec, grim -g "$(slurp)" - | swappy -f -''
 
         # Waybar
@@ -207,133 +225,6 @@ in {
       bindm = [
         "$mainMod, mouse:272, movewindow"
         "$mainMod, mouse:273, resizewindow"
-      ];
-    };
-  };
-
-  # Hyprlock
-  programs.hyprlock = {
-    enable = true;
-    settings = {
-      general = {
-        disable_loading_bar = true;
-        no_fade_in = false;
-        grace = 0;
-      };
-      background = [
-        {
-          monitor = "";
-          path = "/home/dann/pictures/wallpapers/1.jpg";
-          blur_size = 5;
-          blur_passes = 3;
-          noise = "0.0117";
-          contrast = "0.8916";
-          brightness = "0.8172";
-          vibrancy = "0.1696";
-          vibrancy_darkness = "0.0";
-        }
-      ];
-      input-field = [
-        {
-          monitor = "";
-          size = "280, 35";
-          outline_thickness = 2;
-          dots_size = "0.2";
-          dots_spacing = "0.2";
-          dots_center = true;
-          outer_color = "rgba(0, 0, 0, 0)";
-          inner_color = "rgba(0, 0, 0, 0.5)";
-          font_color = "rgb(200, 200, 200)";
-          fade_on_empty = false;
-          font_family = "Inter Display Light";
-          placeholder_text = "<i><span foreground='##cdd6f4'>Input Password...</span></i>";
-          hide_input = false;
-          position = "0, -140";
-          halign = "center";
-          valign = "center";
-        }
-      ];
-      label = [
-        { 
-          monitor = "";
-          text = "$TIME";
-          color = "rgba(255, 255, 255, 0.6)";
-          font_size = 60;
-          font_family = "Inter ExtraBold";
-          position = "0, -280";
-          halign = "center";
-          valign = "top";
-        }
-        {
-          monitor = "";
-          text = ''
-            cmd[update:1000] echo "$(date +"%d %B %Y")"
-          '';
-          color = "rgba(255, 255, 255, 0.6)";
-          font_size = 14;
-          font_family = "Inter Display Medium";
-          position = "0, -370";
-          halign = "center";
-          valign = "top";
-        }
-        {
-          monitor = "";
-          text = "Hi there, $USER 👋";
-          color = "rgba(255, 255, 255, 0.6)";
-          font_size = 12;
-          font_family = "Inter Display Medium";
-          position = "0, -95";
-          halign = "center";
-          valign = "center";
-        }
-      ];
-    };
-  };
-
-  # Hypridle
-  services.hypridle = {
-    enable = true;
-    settings = {
-      general = {
-        lock_cmd = "pidof hyprlock || hyprlock";
-        before_sleep_cmd = "loginctl lock-session";
-        after_sleep_cmd = "hyprctl dispatch dpms on";
-      };
-
-      listener = [
-        {
-          timeout = 180;
-          on-timeout = "brightnessctl -s set 10";
-          on-resume = "brightnessctl -r";
-        }
-        {
-          timeout = 480;
-          on-timeout = "loginctl lock-session";
-        }
-        {
-          timeout = 1200;
-          on-timeout = "hyprctl dispatch dpms off";
-          on-resume = "hyprctl dispatch dpms on";
-        }
-        {
-          timeout = 1800;
-          on-timeout = "systemctl suspend";
-        }
-      ];
-    };
-  };
-
-  # Hyprpaper
-  services.hyprpaper = {
-    enable = true;
-    settings = {
-      ipc = "off";
-      splash = false;
-      preload = [
-        "/home/dann/pictures/wallpapers/1.jpg"
-      ];
-      wallpaper = [
-        "eDP-1, /home/dann/pictures/wallpapers/1.jpg"
       ];
     };
   };

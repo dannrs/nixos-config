@@ -1,22 +1,30 @@
-{ gtkThemeFromScheme, ... }:
-
 {
-  programs.regreet = {
+  pkgs,
+  config,
+  lib,
+  gtkThemeFromScheme,
+  ...
+}: {
+  services.greetd = let
+    session = {
+      command = "${lib.getExe config.programs.uwsm.package} start hyprland-uwsm.desktop";
+      user = "dann";
+    };
+  in {
     enable = true;
     settings = {
-      GTK = {
-        application_prefer_dark_theme = true;
-        cusor_theme_name = "Simp1e";
-        font_name = "Inter Display 12";
-        icon_theme_name = "Papirus-Dark";
-        theme_name = "tokyo-night-dark";
-      };
-      commands = {
-        reboot = [ "systemctl" "reboot" ];
-        poweroff = [ "systemctl" "poweroff" ];
-      };
+      terminal.vt = 1;
+      default_session = session;
+      initial_session = session;
     };
   };
 
-  services.libinput.enable = true;
+  programs.uwsm = {
+    enable = true;
+    waylandCompositors.hyprland = {
+      binPath = "/run/current-system/sw/bin/Hyprland";
+      prettyName = "Hyprland";
+      comment = "Hyprland compositor managed by UWSM";
+    };
+  };
 }

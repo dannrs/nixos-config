@@ -1,11 +1,18 @@
-{ pkgs, ... }:
-
 {
+  inputs,
+  pkgs,
+  system,
+  ...
+}: {
   home.packages = with pkgs; [
-    brave
-    obsidian imv mpv
-    grim slurp swappy
-    zed-editor
+    obsidian
+    imv
+    mpv
+    grim
+    slurp
+    swappy
     lutris
+    spicetify-cli
+    inputs.zen-browser.packages."${system}".default
   ];
 }

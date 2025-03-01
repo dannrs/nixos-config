@@ -1,9 +1,6 @@
-{ pkgs, ... }:
-
-{
+{pkgs, ...}: {
   # Sound
   hardware.pulseaudio.enable = false;
-  sound.enable = true;
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
@@ -32,6 +29,7 @@
   services.gvfs.enable = true;
   services.udisks2.enable = true;
   services.gnome.gnome-keyring.enable = true;
+  services.libinput.enable = true;
 
   security.pam.services.hyprlock = {
     text = ''

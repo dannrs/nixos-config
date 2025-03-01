@@ -1,6 +1,10 @@
-{ config, pkgs, inputs, ... }:
-
 {
+  config,
+  pkgs,
+  inputs,
+  system,
+  ...
+}: {
   imports = [
     inputs.nix-flatpak.homeManagerModules.nix-flatpak
     inputs.nix-colors.homeManagerModules.default
@@ -22,19 +26,29 @@
     };
   };
 
-  xdg.mimeApps.defaultApplications = {
-    "image/jpeg" = [ "imv.desktop" ];
-    "image/png" = [ "imv.desktop" ];
-    "image/gif" = [ "imv.desktop" ];
-    "image/svg+xml" = [ "imv.desktop" ];
-    "image/webp" = [ "firefox.desktop" ];
+  xdg.mimeApps = {
+    enable = true;
+    defaultApplications = {
+      # Default image viewer
+      "image/jpeg" = ["imv.desktop"];
+      "image/png" = ["imv.desktop"];
+      "image/gif" = ["imv.desktop"];
+      "image/svg+xml" = ["imv.desktop"];
+      "image/webp" = ["firefox.desktop"];
 
-    "application/pdf" = [ "firefox.desktop" ];
+      # Default document viewer
+      "application/pdf" = ["firefox.desktop"];
 
-    "video/mp4" = [ "mpv.desktop "];
-    "video/x-matroska" = [ "mpv.desktop "];
-    "video/webm" = [ "mpv.desktop "];
-    "video/quicktime" = [ "mpv.desktop "];
+      # Default video player
+      "video/mp4" = ["mpv.desktop "];
+      "video/x-matroska" = ["mpv.desktop "];
+      "video/webm" = ["mpv.desktop "];
+      "video/quicktime" = ["mpv.desktop "];
+
+      # Default browser
+      "x-scheme-handler/http" = ["zen.desktop" "firefox.desktop"];
+      "x-scheme-handler/https" = ["zen.desktop" "firefox.desktop"];
+    };
   };
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage

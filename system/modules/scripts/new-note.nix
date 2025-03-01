@@ -1,5 +1,4 @@
-{ pkgs }:
-
+{pkgs}:
 # Create a new note in my Obsidian vault
 pkgs.writeShellScriptBin "n" ''
   #!/bin/sh

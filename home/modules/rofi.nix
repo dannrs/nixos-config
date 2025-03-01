@@ -1,64 +1,70 @@
-{ pkgs, config, ... }:
-
-let
+{
+  pkgs,
+  config,
+  ...
+}: let
   theme = config.colorScheme.palette;
   inherit (config.lib.formats.rasi) mkLiteral;
 in {
-programs.rofi = {
-  enable = true;
-  package = pkgs.rofi-wayland;
-  font = "Inter Display Regular 11";
-  location = "center";
-  cycle = true;
-  extraConfig = {
-    modi = "drun,run,filebrowser";
-    show-icons = false;
-    display-drun = "";
-    display-run = "";
-    display-filebrowser = "";
-    display-window = "";
-    drun-display-format = "{name} [<span weight='light' size='small'><i>({generic})</i></span>]";
-    window-format = "{w} · {c} · {t}";
-  };
-  theme = {
-    "*" = {
-      background = mkLiteral "#${theme.base01}FF";
-      background-alt = mkLiteral "#${theme.base02}FF";
-      foreground = mkLiteral "#${theme.base08}FF";
-      selected = mkLiteral "#${theme.base0E}FF";
-      active = mkLiteral "#${theme.base0B}FF";
-      urgent = mkLiteral "#${theme.base0F}FF";
+  programs.rofi = {
+    enable = true;
+    package = pkgs.rofi-wayland;
+    font = "Inter Display Regular 11";
+    location = "center";
+    cycle = true;
+    extraConfig = {
+      modi = "drun,run,filebrowser";
+      show-icons = false;
+      display-drun = "";
+      display-run = "";
+      display-filebrowser = "";
+      display-window = "";
+      drun-display-format = "{name} [<span weight='light' size='small'><i>({generic})</i></span>]";
+      window-format = "{w} · {c} · {t}";
     };
+    theme = {
+      "*" = {
+        background = mkLiteral "#${theme.base01}FF";
+        background-alt = mkLiteral "#${theme.base02}FF";
+        foreground = mkLiteral "#${theme.base08}FF";
+        selected = mkLiteral "#${theme.base0E}FF";
+        active = mkLiteral "#${theme.base0B}FF";
+        urgent = mkLiteral "#${theme.base0F}FF";
+      };
 
-    "*" = {
-      border-colour = mkLiteral "var(selected)";
-      handle-colour = mkLiteral "var(selected)";
-      background-colour = mkLiteral "var(background)";
-      foreground-colour = mkLiteral "var(foreground)";
-      alternate-background = mkLiteral "var(background-alt)";
-      normal-background = mkLiteral "var(background)";
-      normal-foreground = mkLiteral "var(foreground)";
-      urgent-background = mkLiteral "var(urgent)";
-      urgent-foreground = mkLiteral "var(background)";
-      active-background = mkLiteral "var(active)";
-      active-foreground = mkLiteral "var(background)";
-      selected-normal-background = mkLiteral "var(selected)";
-      selected-normal-foreground = mkLiteral "var(background)";
-      selected-urgent-background = mkLiteral "var(active)";
-      selected-urgent-foreground = mkLiteral "var(background)";
-      selected-active-background = mkLiteral "var(urgent)";
-      selected-active-foreground = mkLiteral "var(background)";
-      alternate-normal-background = mkLiteral "var(background)";
-      alternate-normal-foreground = mkLiteral "var(foreground)";
-      alternate-urgent-background = mkLiteral "var(urgent)";
-      alternate-urgent-foreground = mkLiteral "var(background)";
-      alternate-active-background = mkLiteral "var(active)";
-      alternate-active-foreground = mkLiteral "var(background)";
-    };
+      "*" = {
+        border-colour = mkLiteral "var(selected)";
+        handle-colour = mkLiteral "var(selected)";
+        background-colour = mkLiteral "var(background)";
+        foreground-colour = mkLiteral "var(foreground)";
+        alternate-background = mkLiteral "var(background-alt)";
+        normal-background = mkLiteral "var(background)";
+        normal-foreground = mkLiteral "var(foreground)";
+        urgent-background = mkLiteral "var(urgent)";
+        urgent-foreground = mkLiteral "var(background)";
+        active-background = mkLiteral "var(active)";
+        active-foreground = mkLiteral "var(background)";
+        selected-normal-background = mkLiteral "var(selected)";
+        selected-normal-foreground = mkLiteral "var(background)";
+        selected-urgent-background = mkLiteral "var(active)";
+        selected-urgent-foreground = mkLiteral "var(background)";
+        selected-active-background = mkLiteral "var(urgent)";
+        selected-active-foreground = mkLiteral "var(background)";
+        alternate-normal-background = mkLiteral "var(background)";
+        alternate-normal-foreground = mkLiteral "var(foreground)";
+        alternate-urgent-background = mkLiteral "var(urgent)";
+        alternate-urgent-foreground = mkLiteral "var(background)";
+        alternate-active-background = mkLiteral "var(active)";
+        alternate-active-foreground = mkLiteral "var(background)";
+      };
 
-    /*****----- Main Window -----*****/
-    "window" = {
-        /* properties for window widget */
+      /*
+      ****----- Main Window -----****
+      */
+      "window" = {
+        /*
+        properties for window widget
+        */
         transparency = "real";
         location = mkLiteral "center";
         anchor = mkLiteral "center";
@@ -67,7 +73,9 @@ programs.rofi = {
         x-offset = mkLiteral "0px";
         y-offset = mkLiteral "0px";
 
-        /* properties for all widgets */
+        /*
+        properties for all widgets
+        */
         enabled = true;
         margin = mkLiteral "0px";
         padding = mkLiteral "0px";
@@ -78,7 +86,9 @@ programs.rofi = {
         background-color = mkLiteral "@background-colour";
       };
 
-      /*****----- Main Box -----*****/
+      /*
+      ****----- Main Box -----****
+      */
       "mainbox" = {
         enabled = true;
         spacing = mkLiteral "10px";
@@ -88,10 +98,12 @@ programs.rofi = {
         border-radius = mkLiteral "0px 0px 0px 0px";
         border-color = mkLiteral "@border-colour";
         background-color = mkLiteral "transparent";
-        children = map mkLiteral [ "inputbar" "message" "listview" "mode-switcher" ];
+        children = map mkLiteral ["inputbar" "message" "listview" "mode-switcher"];
       };
 
-      /*****----- Inputbar -----*****/
+      /*
+      ****----- Inputbar -----****
+      */
       "inputbar" = {
         enabled = true;
         spacing = mkLiteral "10px";
@@ -102,7 +114,7 @@ programs.rofi = {
         border-color = mkLiteral "@border-colour";
         background-color = mkLiteral "@alternate-background";
         text-color = mkLiteral "@foreground-colour";
-        children = map mkLiteral [ "prompt" "entry" ];
+        children = map mkLiteral ["prompt" "entry"];
       };
 
       "prompt" = {
@@ -112,23 +124,25 @@ programs.rofi = {
       };
 
       "textbox-prompt-colon" = {
-          enabled = true;
-          expand = false;
-          str = "::";
-          background-color = mkLiteral "inherit";
-          text-color = mkLiteral "inherit";
+        enabled = true;
+        expand = false;
+        str = "::";
+        background-color = mkLiteral "inherit";
+        text-color = mkLiteral "inherit";
       };
 
       "entry" = {
-          enabled = true;
-          background-color = mkLiteral "inherit";
-          text-color = mkLiteral "inherit";
-          cursor = mkLiteral "text";
-          placeholder = "Search...";
-          placeholder-color = mkLiteral "inherit";
+        enabled = true;
+        background-color = mkLiteral "inherit";
+        text-color = mkLiteral "inherit";
+        cursor = mkLiteral "text";
+        placeholder = "Search...";
+        placeholder-color = mkLiteral "inherit";
       };
 
-      /*****----- Listview -----*****/
+      /*
+      ****----- Listview -----****
+      */
       "listview" = {
         enabled = true;
         columns = 1;
@@ -158,7 +172,9 @@ programs.rofi = {
         background-color = mkLiteral "@alternate-background";
       };
 
-      /*****----- Elements -----*****/
+      /*
+      ****----- Elements -----****
+      */
       "element" = {
         enabled = true;
         spacing = mkLiteral "10px";
@@ -222,7 +238,9 @@ programs.rofi = {
         horizontal-align = mkLiteral "0.0";
       };
 
-      /*****----- Mode Switcher -----*****/
+      /*
+      ****----- Mode Switcher -----****
+      */
       "mode-switcher" = {
         enabled = true;
         spacing = mkLiteral "10px";
@@ -248,7 +266,9 @@ programs.rofi = {
         text-color = mkLiteral "var(selected-normal-foreground)";
       };
 
-      /*****----- Message -----*****/
+      /*
+      ****----- Message -----****
+      */
       "message" = {
         enabled = true;
         margin = mkLiteral "0px";

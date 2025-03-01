@@ -1,18 +1,19 @@
 {
-  hardware.opengl = {
+  hardware.graphics = {
     enable = true;
-    driSupport = true;
-    driSupport32Bit = true;
+    enable32Bit = true;
   };
 
-  services.xserver.videoDrivers = [ "nvidia" ];
+  services.xserver.videoDrivers = ["nvidia"];
 
   hardware.nvidia = {
     modesetting.enable = true;
+    open = false;
+    nvidiaSettings = true;
     prime = {
-       sync.enable = true;
-       intelBusId = "PCI:00:02:0";
-       nvidiaBusId = "PCI:01:00:0";
+      sync.enable = true;
+      intelBusId = "PCI:0:2:0";
+      nvidiaBusId = "PCI:1:0:0";
     };
   };
 }
