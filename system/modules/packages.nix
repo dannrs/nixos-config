@@ -53,7 +53,7 @@ in {
 
     #nix related stuffs
     alejandra
-    nil
+    nixd
 
     pcmanfm
     xfce.thunar

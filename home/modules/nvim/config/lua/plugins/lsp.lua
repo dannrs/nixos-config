@@ -17,7 +17,16 @@ return {
         lua_ls = {
           mason = false,
         },
-        nil_ls = {},
+        nixd = {
+          nixpkgs = {
+            expr = "import <nixpkgs> { }",
+          },
+          options = {
+            nixos = {
+              expr = '(builtins.getFlake ("git+file://" + toString ~/nixos)).nixosConfigurations.nixos.options',
+            },
+          },
+        },
       },
     },
   },

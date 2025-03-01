@@ -3,7 +3,7 @@
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 {
   config,
-  lib,
+  inputs,
   pkgs,
   ...
 }: {
@@ -37,6 +37,7 @@
   # };
 
   nix = {
+    nixPath = ["nixpkgs=${inputs.nixpkgs}"];
     settings = {
       auto-optimise-store = true;
       experimental-features = ["nix-command" "flakes"];
@@ -53,7 +54,6 @@
     isNormalUser = true;
     description = "danniramdhanis";
     extraGroups = ["wheel" "networkmanager" "input"]; # Enable ‘sudo’ for the user.
-    packages = with pkgs; [];
     shell = pkgs.fish;
   };
 
