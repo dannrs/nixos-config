@@ -16,7 +16,22 @@
     };
 
     nix-flatpak.url = "github:gmodena/nix-flatpak";
-    nix-colors.url = "github:misterio77/nix-colors";
+    #use fork (because of the 'stylix.image' null bug) until this pull request is merged
+    #https://github.com/danth/stylix/pull/941
+    stylix = {
+      url = "github:merrkry/stylix";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        home-manager.follows = "home-manager";
+      };
+    };
+    # stylix = {
+    #   url = "github:danth/stylix";
+    #   inputs = {
+    #     nixpkgs.follows = "nixpkgs";
+    #     home-manager.follows = "home-manager";
+    #   };
+    # };
     zen-browser.url = "github:0xc000022070/zen-browser-flake";
   };
 
@@ -29,22 +44,16 @@
     inherit (self) outputs;
     system = "x86_64-linux";
     lib = nixpkgs.lib;
-    pkgs = import nixpkgs {
-      inherit system;
-      config = {
-        allowUnfree = true;
-      };
-    };
   in {
     #overlays = import ./overlays { inherit inputs; };
     nixosConfigurations.nixos = lib.nixosSystem {
       specialArgs = {
         inherit inputs outputs system;
-        inherit (inputs.nix-colors.lib-contrib {inherit pkgs;}) gtkThemeFromScheme;
       };
       modules = [
         ./system
         inputs.disko.nixosModules.disko
+        inputs.stylix.nixosModules.stylix
         home-manager.nixosModules.home-manager
         {
           home-manager.useGlobalPkgs = true;
@@ -52,7 +61,6 @@
           home-manager.backupFileExtension = "backup";
           home-manager.extraSpecialArgs = {
             inherit inputs outputs system;
-            inherit (inputs.nix-colors.lib-contrib {inherit pkgs;}) gtkThemeFromScheme;
           };
           home-manager.users."dann".imports = [
             ./home

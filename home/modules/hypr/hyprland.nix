@@ -1,5 +1,14 @@
-{config, ...}: let
-  theme = config.colorScheme.palette;
+{
+  lib,
+  config,
+  ...
+}: let
+  inherit
+    (config.lib.stylix.colors)
+    base04
+    base09
+    base0E
+    ;
 in {
   # Hyprland
   wayland.windowManager.hyprland = {
@@ -52,9 +61,8 @@ in {
         gaps_in = 2;
         gaps_out = 5;
         border_size = 2;
-        "col.active_border" = "rgba(${theme.base0E}FF) rgba(${theme.base09}FF) 45deg";
-        "col.inactive_border" = "rgba(${theme.base04}4D)";
-
+        "col.active_border" = lib.mkForce "rgba(${base0E}FF) rgba(${base09}FF) 45deg";
+        "col.inactive_border" = lib.mkForce "rgba(${base04}4D)";
         allow_tearing = true;
         resize_on_border = true;
       };
@@ -129,6 +137,10 @@ in {
         "workspace 10 silent, class:(Spotify)"
         "immediate, class:^(.*.exe)$"
         "immediate, class:^(steam_app_.*)$"
+      ];
+
+      layerrule = [
+        "blur, waybar"
       ];
 
       exec-once = [

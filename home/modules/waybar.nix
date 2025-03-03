@@ -1,5 +1,20 @@
-{config, ...}: let
-  theme = config.colorScheme.palette;
+{
+  config,
+  lib,
+  ...
+}: let
+  inherit
+    (config.lib.stylix.colors.withHashtag)
+    base00
+    base01
+    base02
+    base03
+    base04
+    base08
+    base0B
+    base0E
+    base0F
+    ;
 in {
   programs.waybar = {
     enable = true;
@@ -9,7 +24,7 @@ in {
         position = "top";
         margin = "5 5 0 5";
 
-        modules-left = ["hyprland/workspaces" "hyprland/window"];
+        modules-left = ["custom/logo" "hyprland/workspaces" "hyprland/window"];
         modules-right = ["network" "pulseaudio" "backlight" "battery" "clock" "tray"];
 
         "hyprland/workspaces" = {
@@ -33,7 +48,7 @@ in {
           format-icons = ["󰤯" "󰤟" "󰤢" "󰤥" "󰤨"];
           format-ethernet = "{icon} {bandwidthDownBytes}  {bandwidthUpBytes} ";
           format-wifi = "{icon} {bandwidthDownBytes}   {bandwidthUpBytes} ";
-          format-disconnected = "󰤮";
+          format-disconnected = "󰤭";
           tooltip = false;
           max-length = 30;
         };
@@ -41,12 +56,10 @@ in {
         "pulseaudio" = {
           # scroll-step = 1; # %, can be a float
           reverse-scrolling = 1;
-          format = "{volume}% {icon}  {format_source}";
+          format = "{volume}% {icon}";
           format-bluetooth = "{volume}% {icon} {format_source}";
-          format-bluetooth-muted = " {icon} {format_source}";
-          format-muted = " {format_source}";
-          format-source = "{volume}% ";
-          format-source-muted = "";
+          format-bluetooth-muted = " {icon} {format_source}";
+          format-muted = " {format_source}";
           format-icons = {
             headphone = "";
             hands-free = "";
@@ -62,7 +75,7 @@ in {
         "backlight" = {
           device = "intel_backlight";
           format = "{percent}% {icon}";
-          format-icons = [""];
+          format-icons = ["󰃠"];
         };
 
         battery = {
@@ -79,13 +92,18 @@ in {
         };
 
         tray = {
-          icon-size = 16;
+          icon-size = 14;
           spacing = 4;
+        };
+
+        "custom/logo" = {
+          format = "";
+          tooltip = false;
         };
       };
     };
 
-    style = ''
+    style = lib.mkForce ''
       * {
           border: none;
           border-radius: 0;
@@ -96,7 +114,9 @@ in {
       }
 
       window#waybar {
-          background: transparent;
+          background: alpha(${base00}, 0.95);
+          color: ${base04};
+          border-radius: 18px;
       }
 
       window#waybar.hidden {
@@ -108,32 +128,32 @@ in {
       }
 
       tooltip {
-        background: #${theme.base02};
-      	border: 0px solid #${theme.base0E};
+        background: ${base02};
+      	border: 0px solid ${base0E};
       	border-radius: 12px;
       }
 
       tooltip label {
-      	color: #${theme.base08};
+      	color: ${base08};
       }
 
       #workspaces {
-          margin-right: 8px;
-          border-radius: 15px;
+          margin: 5px 8px;
+          border-radius: 18px;
           transition: none;
-          background: #${theme.base02};
+          background: ${base02};
       }
 
       #workspaces button {
           transition: none;
-          color: #${theme.base04};
+          color: ${base04};
           background: transparent;
-          padding: 5px;
+          padding: 5px 7px;
           font-size: 13px;
       }
 
       #workspaces button.persistent {
-          color: #${theme.base04};
+          color: ${base04};
           font-size: 13px;
       }
 
@@ -143,91 +163,98 @@ in {
           box-shadow: inherit;
           text-shadow: inherit;
           border-radius: inherit;
-          color: #${theme.base02};
-          background: #${theme.base04};
+          color: ${base02};
+          background: ${base04};
       }
 
       #workspaces button.active {
-          background: #${theme.base03};
-          color: #${theme.base08};
+          background: ${base03};
+          color: ${base08};
           border-radius: inherit;
+      }
+
+      #custom-logo {
+        margin-left: 10px;
+        font-size: 16px;
+        color: ${base08};
       }
 
       #window {
           padding: 0px 10px;
-          color: #${theme.base08};
-          background: #${theme.base02};
-          border-radius: 12px;
+          margin-right: 8px;
+          background-color: transparent;
+          color: ${base08};
           font-size: 14px;
       }
 
       #clock {
           padding: 0px 10px;
-          border-radius: 12px;
+          margin: 5px 8px 5px 0px;
+          border-radius: 15px;
           transition: none;
-          color: #${theme.base08};
-          background: #${theme.base02};
+          color: ${base08};
+          background: ${base02};
           font-size: 13px;
       }
 
       #pulseaudio {
-          margin-right: 8px;
           padding: 0px 10px;
-          border-radius: 12px;
+          margin: 5px 8px 5px 0px;
+          border-radius: 15px;
           transition: none;
-          color: #${theme.base08};
-          background: #${theme.base02};
+          color: ${base08};
+          background: ${base02};
           font-size: 13px;
       }
 
       #network {
-          margin-right: 8px;
           padding: 0px 10px;
-          border-radius: 12px;
+          margin: 5px 8px 5px 0px;
+          border-radius: 15px;
           transition: none;
-          color: #${theme.base08};
-          background: #${theme.base02};
+          color: ${base08};
+          background: ${base02};
           font-size: 13px;
       }
 
       #pulseaudio.muted {
-          background-color: #${theme.base08};
-          color: #${theme.base01};
+          background-color: ${base08};
+          color: ${base01};
       }
 
       #backlight {
-          margin-right: 8px;
           padding: 0px 10px;
-          border-radius: 12px;
+          margin: 5px 8px 5px 0px;
+          border-radius: 15px;
           transition: none;
-          color: #${theme.base08};
-          background: #${theme.base02};
+          color: ${base08};
+          background: ${base02};
           font-size: 13px;
       }
 
       #battery {
-          margin-right: 8px;
           padding: 0px 10px;
-          border-radius: 12px;
+          margin: 5px 8px 5px 0px;
+          border-radius: 15px;
           transition: none;
-          color: #${theme.base08};
-          background: #${theme.base02};
+          color: ${base08};
+          background: ${base02};
           font-size: 13px;
       }
 
       #battery.charging {
-          color: #${theme.base00};
-          background-color: #${theme.base0B};
+          color: ${base00};
+          background-color: ${base0B};
       }
 
       #battery.warning:not(.charging) {
-          background-color: #${theme.base0B};
-          color: #${theme.base00};
+          background-color: ${base0B};
+          color: ${base00};
       }
 
       #battery.critical:not(.charging) {
-          background-color: #${theme.base0F};
-          color: #${theme.base00};
+          background-color: ${base0F};
+          color: ${base00};
           animation-name: blink;
           animation-duration: 0.5s;
           animation-timing-function: linear;
@@ -236,19 +263,19 @@ in {
       }
 
       #tray {
-          margin-left: 8px;
+          margin: 5px 8px 5px 0px;
           padding: 0px 10px;
-          border-radius: 12px;
+          border-radius: 15px;
           transition: none;
-          color: #${theme.base08};
-          background: #${theme.base02};
+          color: ${base08};
+          background: transparent;
           font-size: 13px;
       }
 
       @keyframes blink {
           to {
-              background-color: #${theme.base08};
-              color: #${theme.base02};
+              background-color: ${base08};
+              color: ${base02};
           }
       }
     '';

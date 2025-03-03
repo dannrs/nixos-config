@@ -1,27 +1,11 @@
-{
-  pkgs,
-  config,
-  gtkThemeFromScheme,
-  ...
-}: {
+{pkgs, ...}: {
   home.pointerCursor = {
     gtk.enable = true;
     x11.enable = true;
-    package = pkgs.simp1e-cursors;
-    name = "Simp1e";
-    size = 16;
   };
 
   gtk = {
     enable = true;
-    font = {
-      name = "Inter Display";
-      size = 11;
-    };
-    theme = {
-      name = "${config.colorScheme.slug}";
-      package = gtkThemeFromScheme {scheme = config.colorScheme;};
-    };
     iconTheme = {
       name = "Papirus-Dark";
       package = pkgs.papirus-icon-theme;

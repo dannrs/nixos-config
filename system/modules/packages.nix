@@ -55,6 +55,7 @@ in {
     alejandra
     nixd
 
+    base16-schemes
     pcmanfm
     xfce.thunar
     wget

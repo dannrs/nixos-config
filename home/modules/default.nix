@@ -14,6 +14,7 @@
     ./mako.nix
     ./rofi.nix
     ./starship.nix
+    ./stylix.nix
     ./swappy.nix
     ./text-editor.nix
     ./tmux.nix

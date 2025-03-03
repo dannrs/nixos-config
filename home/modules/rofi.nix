@@ -1,15 +1,24 @@
 {
   pkgs,
+  lib,
   config,
   ...
 }: let
-  theme = config.colorScheme.palette;
+  inherit
+    (config.lib.stylix.colors.withHashtag)
+    base01
+    base02
+    base08
+    base0B
+    base0E
+    base0F
+    ;
   inherit (config.lib.formats.rasi) mkLiteral;
 in {
   programs.rofi = {
     enable = true;
     package = pkgs.rofi-wayland;
-    font = "Inter Display Regular 11";
+    font = lib.mkForce "Inter Display 11";
     location = "center";
     cycle = true;
     extraConfig = {
@@ -22,14 +31,14 @@ in {
       drun-display-format = "{name} [<span weight='light' size='small'><i>({generic})</i></span>]";
       window-format = "{w} · {c} · {t}";
     };
-    theme = {
+    theme = lib.mkForce {
       "*" = {
-        background = mkLiteral "#${theme.base01}FF";
-        background-alt = mkLiteral "#${theme.base02}FF";
-        foreground = mkLiteral "#${theme.base08}FF";
-        selected = mkLiteral "#${theme.base0E}FF";
-        active = mkLiteral "#${theme.base0B}FF";
-        urgent = mkLiteral "#${theme.base0F}FF";
+        background = mkLiteral "${base01}FF";
+        background-alt = mkLiteral "${base02}FF";
+        foreground = mkLiteral "${base08}FF";
+        selected = mkLiteral "${base0E}FF";
+        active = mkLiteral "${base0B}FF";
+        urgent = mkLiteral "${base0F}FF";
       };
 
       "*" = {
