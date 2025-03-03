@@ -10,8 +10,15 @@ in {
     enable = true;
     settings = {
       theme = "tokyonight_night";
-      font-size = 10.5;
-      custom-shader = "./ghostty-shaders/bettercrt.glsl";
+      font-size = 10;
+      adjust-cell-height = "30%";
+      window-padding-x = 6;
+      window-padding-y = 2;
+      window-padding-balance = true;
+      background-opacity = 0.90;
+      background-blur = true;
+      gtk-single-instance = true;
+      #custom-shader = "./ghostty-shaders/bettercrt.glsl";
     };
   };
 

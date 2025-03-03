@@ -154,7 +154,7 @@ in {
       bind = [
         "$mainMod SHIFT, E, exec, pkill Hyprland"
         "$mainMod, V, exec, cliphist list | wofi --dmenu | cliphist decode | wl-copy"
-        "$mainMod, Return, exec, foot"
+        "$mainMod, Return, exec, ghostty"
         "$mainMod, Q, killactive,"
         "$mainMod SHIFT, M, exit,"
         "$mainMod, E, exec, pcmanfm"
