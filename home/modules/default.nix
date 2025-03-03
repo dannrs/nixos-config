@@ -10,6 +10,7 @@
     ./ghostty.nix
     ./gtk-qt.nix
     ./hypr
+    ./ncmpcpp.nix
     ./nvim
     ./mako.nix
     ./rofi.nix
