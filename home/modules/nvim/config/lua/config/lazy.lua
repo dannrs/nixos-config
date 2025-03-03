@@ -13,7 +13,7 @@ require("lazy").setup({
     {
       "LazyVim/LazyVim",
       import = "lazyvim.plugins",
-      opts = { colorscheme = "tokyonight", news = { lazyvim = true, neovim = true } },
+      opts = { colorscheme = "tokyonight", news = { lazyvim = false, neovim = false } },
     },
     -- lang
     { import = "lazyvim.plugins.extras.linting.eslint" },

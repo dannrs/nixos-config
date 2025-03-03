@@ -17,8 +17,8 @@
       addAll = builtins.mapAttrs (k: v: ["Symbols Nerd Font"] ++ v ++ ["Noto Color Emoji"]);
     in
       addAll {
-        serif = ["Noto Serif"];
-        sansSerif = ["Inter"];
+        serif = ["Inter Display"];
+        sansSerif = ["Inter Display"];
         monospace = ["JetBrains Mono"];
         emoji = [];
       };

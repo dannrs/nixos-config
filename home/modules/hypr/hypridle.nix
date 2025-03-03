@@ -8,7 +8,7 @@
   '';
 in {
   services.hypridle = {
-    enable = false;
+    enable = true;
     settings = {
       general = {
         lock_cmd = "pidof hyprlock || hyprlock";
@@ -18,16 +18,16 @@ in {
 
       listener = [
         {
-          timeout = 300;
+          timeout = 480;
           on-timeout = "brightnessctl -s set 10";
           on-resume = "brightnessctl -r";
         }
         {
-          timeout = 600;
+          timeout = 900;
           on-timeout = "${pkgs.systemd}/bin/loginctl lock-session";
         }
         {
-          timeout = 1500;
+          timeout = 1800;
           on-timeout = "hyprctl dispatch dpms off";
           on-resume = "hyprctl dispatch dpms on";
         }

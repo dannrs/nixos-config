@@ -1,4 +1,4 @@
-{pkgs, ...}: {
+{
   programs.fastfetch = {
     enable = true;
     settings = {
@@ -11,7 +11,7 @@
 
       display = {
         separator = "";
-        keyWidth = 12;
+        key.width = 12;
       };
 
       modules = [

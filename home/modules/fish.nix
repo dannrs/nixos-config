@@ -28,7 +28,9 @@
       tl = "tmux ls";
 
       v = "nvim";
-      vf = "nvim (fzf)";
+
+      #find file and open it on neovim
+      f = "fd --type f | fzf --print0 | xargs -0 -r nvim";
 
       nx = "cd && cd nixos";
       pr = "cd && cd documents/projects";
