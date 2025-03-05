@@ -1,5 +1,5 @@
 {pkgs, ...}: let
-  opacity = 0.95;
+  opacity = 0.8;
   fontSize = 11;
 in {
   stylix = {

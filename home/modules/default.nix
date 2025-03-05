@@ -21,5 +21,6 @@
     ./tmux.nix
     ./waybar.nix
     ./wezterm.nix
+    ./wlogout.nix
   ];
 }

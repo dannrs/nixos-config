@@ -1,6 +1,7 @@
 {
   config,
   lib,
+  pkgs,
   ...
 }: let
   inherit
@@ -15,6 +16,24 @@
     base0E
     base0F
     ;
+
+  now-playing = pkgs.writeShellScript "now-playing" ''
+    playerctl=${pkgs.playerctl}
+    PLAYER_STATUS=$(playerctl status -p spotify 2>/dev/null)
+
+    if [[ "$PLAYER_STATUS" == "Playing" || "$PLAYER_STATUS" == "Paused" ]]; then
+      ARTIST=$(playerctl metadata artist)
+      TITLE=$(playerctl metadata title)
+
+      if [[ -n "$ARTIST" && -n "$TITLE" ]]; then
+        echo "$ARTIST - $TITLE"
+      else
+        echo "No track playing"
+      fi
+    else
+      echo " "
+    fi
+  '';
 in {
   programs.waybar = {
     enable = true;
@@ -25,7 +44,7 @@ in {
         margin = "5 5 0 5";
 
         modules-left = ["custom/logo" "hyprland/workspaces" "hyprland/window"];
-        modules-right = ["network" "pulseaudio" "backlight" "battery" "clock" "tray"];
+        modules-right = ["network" "pulseaudio" "backlight" "battery" "clock" "tray" "custom/power-menu"];
 
         "hyprland/workspaces" = {
           disable-scroll = true;
@@ -99,6 +118,24 @@ in {
         "custom/logo" = {
           format = "";
           tooltip = false;
+          on-click = "rofi -show drun";
+        };
+
+        "custom/power-menu" = {
+          format = "";
+          tooltip = false;
+          on-click = "wlogout -b 5 -c 0 r 0 -p layer-shell";
+        };
+
+        "custom/now-playing" = {
+          format = "  {text}";
+          interval = 30;
+          max-length = 30;
+          tooltip = false;
+          on-click = "playerctl play-pause";
+          escape = true;
+          exec = now-playing.outPath;
+          exec-if = "pgrep spotify";
         };
       };
     };
@@ -114,7 +151,7 @@ in {
       }
 
       window#waybar {
-          background: alpha(${base00}, 0.95);
+          background: alpha(${base00}, 0.8);
           color: ${base04};
           border-radius: 18px;
       }
@@ -177,6 +214,22 @@ in {
         margin-left: 10px;
         font-size: 16px;
         color: ${base08};
+      }
+
+      #custom-power-menu {
+        margin-right: 10px;
+        font-size: 14px;
+        color: ${base08};
+      }
+
+      #custom-now-playing {
+          padding: 0px 10px;
+          margin: 5px 8px 5px 0px;
+          border-radius: 15px;
+          transition: none;
+          color: ${base08};
+          background: ${base02};
+          font-size: 13px;
       }
 
       #window {
@@ -263,9 +316,8 @@ in {
       }
 
       #tray {
-          margin: 5px 8px 5px 0px;
-          padding: 0px 10px;
-          border-radius: 15px;
+          margin: 5px 0px;
+          padding: 0px 5px;
           transition: none;
           color: ${base08};
           background: transparent;
