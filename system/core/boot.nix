@@ -2,7 +2,7 @@
   boot = {
     initrd = {
       systemd.enable = true;
-      supportedFilesystems = ["ext4" "ntfs"];
+      supportedFilesystems = ["ext4" "btrfs" "ntfs"];
     };
 
     kernelPackages = pkgs.linuxPackages_latest;
@@ -17,12 +17,7 @@
 
     loader = {
       efi.canTouchEfiVariables = true;
-      #systemd-boot.enable = true;
-      grub = {
-        enable = true;
-        efiSupport = true;
-        devices = ["nodev"];
-      };
+      systemd-boot.enable = true;
     };
 
     plymouth.enable = true;
