@@ -3,7 +3,7 @@
     enable = true;
     settings = {
       logo = {
-        type = "small";
+        source = "nixos_small";
         padding = {
           top = 1;
         };

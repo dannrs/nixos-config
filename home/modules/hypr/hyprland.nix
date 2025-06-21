@@ -124,37 +124,36 @@ in {
       xwayland.force_zero_scaling = true;
 
       windowrule = [
-        "maximize, ^(imv)$"
-        "float, ^(mpv)$"
-        "float,^(.*.exe)$"
-        "float,^(steam_app_.*)$"
-        "float,^(steam_proton)$"
-      ];
+        "maximize, class:^(imv)$"
+        "float, class:^(mpv)$"
+        "fullscreen, class:^(.*.exe)$"
+        "fullscreen, class:^(steam_app_.*)$"
+        "fullscreen, class:^(steam_proton)$"
 
-      windowrulev2 = [
         "workspace 3 silent, class:(obsidian)"
         "workspace 9 silent, class:(discord)"
         "workspace 10 silent, class:(Spotify)"
         "immediate, class:^(.*.exe)$"
         "immediate, class:^(steam_app_.*)$"
+        "immediate, class:^(steam_proton)$"
       ];
 
-      layerrule = [
-        "blur, waybar"
-      ];
+      # layerrule = [
+      #   "blur, waybar"
+      # ];
 
       exec-once = [
         "waybar"
         "xsetroot -cursor_name left_ptr"
         "wl-paste --type text --watch cliphist store"
         "wl-paste --type image --watch cliphist store"
-        #"[workspace 9 silent] flatpak run com.discordapp.Discord"
+        "[workspace 9 silent] flatpak run com.discordapp.Discord"
       ];
 
       bind = [
         "$mainMod SHIFT, E, exec, hyprctl dispatch exit"
         "$mainMod, V, exec, cliphist list | wofi --dmenu | cliphist decode | wl-copy"
-        "$mainMod, Return, exec, ghostty"
+        "$mainMod, Return, exec, wezterm"
         "$mainMod, Q, killactive,"
         "$mainMod SHIFT, M, exit,"
         "$mainMod, E, exec, pcmanfm"
@@ -164,6 +163,7 @@ in {
         "$mainMod, D, exec, rofi -show drun"
         "$mainMod, P, pseudo, # dwindle"
         "$mainMod, S, togglesplit, # dwindle"
+        "$mainMod, z, exec, wvkbd-mobintl"
 
         "$mainMod, Escape, exec, hyprlock"
         ", Print, exec, screenshot"
@@ -226,7 +226,7 @@ in {
         ", XF86MonBrightnessUp, exec, brightnessctl set +5% "
 
         # Screenshots
-        '', Print, exec, grim -g "$(slurp)" - | swappy -f -''
+        "$mainMod SHIFT, S, exec, grim - | swappy -f -"
 
         # Waybar
         "$mainMod, B, exec, pkill -SIGUSR1 waybar"

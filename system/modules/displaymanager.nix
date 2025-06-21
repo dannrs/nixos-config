@@ -2,7 +2,6 @@
   pkgs,
   config,
   lib,
-  gtkThemeFromScheme,
   ...
 }: {
   services.greetd = let
@@ -18,6 +17,18 @@
       initial_session = session;
     };
   };
+
+  # programs.regreet = {
+  #   enable = true;
+  #   settings = {
+  #     commands = {
+  #       reboot = ["systemctl" "reboot"];
+  #       poweroff = ["systemctl" "poweroff"];
+  #     };
+  #   };
+  # };
+
+  # services.displayManager.sddm.enable = true;
 
   programs.uwsm = {
     enable = true;

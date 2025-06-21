@@ -13,14 +13,16 @@
   ];
 
   boot.initrd.availableKernelModules = ["xhci_pci" "ahci" "usb_storage" "usbhid" "sd_mod" "rtsx_usb_sdmmc"];
-  boot.initrd.kernelModules = [];
+  boot.initrd.kernelModules = ["nvidia"];
+  boot.blacklistedKernelModules = ["nouveau"];
   boot.kernelModules = ["kvm-intel"];
   boot.extraModulePackages = [];
 
-  # fileSystems."/run/media/dann" = {
-  #   device = "/dev/disk/by-uuid/782ED1DD2ED1950A";
-  #   fsType = "ntfs";
-  # };
+  fileSystems."/run/media/dann" = {
+    device = "/dev/disk/by-uuid/782ED1DD2ED1950A";
+    fsType = "ntfs-3g";
+    options = ["rw" "uid=1000"];
+  };
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
   # (the default) this is the recommended approach. When using systemd-networkd it's

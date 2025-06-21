@@ -16,23 +16,17 @@
     };
 
     nix-flatpak.url = "github:gmodena/nix-flatpak";
-    #use fork (because of the 'stylix.image' null bug) until this pull request is merged
-    #https://github.com/danth/stylix/pull/941
     stylix = {
-      url = "github:merrkry/stylix";
+      url = "github:nix-community/stylix";
       inputs = {
         nixpkgs.follows = "nixpkgs";
         home-manager.follows = "home-manager";
       };
     };
-    # stylix = {
-    #   url = "github:danth/stylix";
-    #   inputs = {
-    #     nixpkgs.follows = "nixpkgs";
-    #     home-manager.follows = "home-manager";
-    #   };
-    # };
-    zen-browser.url = "github:0xc000022070/zen-browser-flake";
+    zen-browser = {
+      url = "github:0xc000022070/zen-browser-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = {

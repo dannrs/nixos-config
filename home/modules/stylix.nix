@@ -1,5 +1,5 @@
 {pkgs, ...}: let
-  opacity = 0.8;
+  opacity = 0.85;
   fontSize = 11;
 in {
   stylix = {
@@ -20,7 +20,7 @@ in {
         applications = fontSize;
         desktop = fontSize;
         popups = fontSize;
-        terminal = 10;
+        terminal = 10.5;
       };
       serif = {
         package = pkgs.inter;
@@ -32,7 +32,7 @@ in {
       };
       monospace = {
         package = pkgs.nerd-fonts.jetbrains-mono;
-        name = "JetBrains Mono";
+        name = "JetBrains Mono Nerd Font";
       };
       emoji = {
         package = pkgs.noto-fonts-emoji;
@@ -50,6 +50,10 @@ in {
       neovim.enable = false;
       waybar.enable = false;
       rofi.enable = false;
+      vscode.enable = false;
+      tmux.enable = false;
+      fzf.enable = false;
+      # plymouth.enable = false;
     };
   };
 }

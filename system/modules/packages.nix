@@ -13,7 +13,7 @@ in {
     config = {
       allowUnfree = true;
       permittedInsecurePackages = [
-        "freeimage-unstable-2021-11-01"
+        "freeimage-3.18.0-unstable-2024-04-18"
       ];
     };
     # overlays = [
@@ -42,31 +42,35 @@ in {
   };
 
   environment.systemPackages = with pkgs; [
-    #emulationstation-de
     #custom scripts
     new-note
     screenshot
     gaming-mode
 
+    remmina
+
     #custom pkgs
-    es-de
+    #es-de
 
     #nix related stuffs
     alejandra
     nixd
 
     base16-schemes
-    pcmanfm
-    xfce.thunar
     wget
     lshw
     home-manager
     wl-clipboard
     firefox
+    google-chrome
     xdg-desktop-portal-hyprland
     libnotify
 
+    docker-compose
+    postgresql
+
     unzip
+    unrar
     zip
     p7zip
     undmg
@@ -93,7 +97,8 @@ in {
     lua-language-server
     lazygit
 
-    nodejs_20
+    nodejs_22
+    pnpm
     bun
     turso-cli
 
@@ -104,16 +109,25 @@ in {
     playerctl
     fd
     ripgrep
+    wvkbd
 
     heroic
     file-roller
     neovide
 
+    gutenprint
+    wine-staging
     zenity
   ];
 
-  programs.appimage = {
-    enable = true;
-    binfmt = true;
+  programs = {
+    appimage = {
+      enable = true;
+      binfmt = true;
+    };
+    thunar = {
+      enable = true;
+      plugins = with pkgs.xfce; [thunar-archive-plugin thunar-volman];
+    };
   };
 }

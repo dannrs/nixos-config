@@ -32,6 +32,8 @@
       #find file and open it on neovim
       f = "fd --type f | fzf --print0 | xargs -0 -r nvim";
 
+      np = "playerctl -p spotify metadata --format '🎵 {{artist}} - {{title}}' 2>/dev/null || echo '⏹ No player active'";
+
       nx = "cd && cd nixos";
       pr = "cd && cd documents/projects";
       nt = "cd && cd documents/notes";

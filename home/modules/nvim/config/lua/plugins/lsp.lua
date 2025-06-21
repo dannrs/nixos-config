@@ -11,9 +11,18 @@ return {
   },
   {
     "neovim/nvim-lspconfig",
+    version = "*",
     opts = {
       inlay_hints = { enabled = false },
       servers = {
+        eslint = {
+          settings = {
+            workingDirectories = { mode = "auto" },
+            experimental = {
+              useFlatConfig = true,
+            },
+          },
+        },
         lua_ls = {
           mason = false,
         },

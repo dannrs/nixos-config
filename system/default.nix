@@ -53,7 +53,7 @@
   users.users.dann = {
     isNormalUser = true;
     description = "danniramdhanis";
-    extraGroups = ["wheel" "networkmanager" "input"]; # Enable ‘sudo’ for the user.
+    extraGroups = ["wheel" "networkmanager" "input" "docker" "lp" "lpadmin"]; # Enable ‘sudo’ for the user.
     shell = pkgs.fish;
   };
 

@@ -1,6 +1,6 @@
 {pkgs, ...}: {
   # Sound
-  hardware.pulseaudio.enable = false;
+  services.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
@@ -12,6 +12,21 @@
   # Bluetooth
   hardware.bluetooth.enable = true;
   services.blueman.enable = true;
+
+  # Printing
+  services.printing = {
+    enable = true;
+    drivers = with pkgs; [gutenprint epson-escpr];
+  };
+
+  # Docker
+  virtualisation.docker = {
+    enable = true;
+    package = pkgs.docker.override {
+      initSupport = true;
+    };
+    storageDriver = "btrfs";
+  };
 
   xdg.portal = {
     enable = true;
@@ -30,6 +45,12 @@
   services.udisks2.enable = true;
   services.gnome.gnome-keyring.enable = true;
   services.libinput.enable = true;
+
+  # MySQL
+  services.mysql = {
+    enable = true;
+    package = pkgs.mariadb;
+  };
 
   security.pam.services.hyprlock = {
     text = ''

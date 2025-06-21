@@ -3,6 +3,7 @@
     packages = with pkgs; [
       inter
       jetbrains-mono
+      monaspace
       noto-fonts
       noto-fonts-cjk-sans
       noto-fonts-emoji
@@ -11,6 +12,7 @@
       powerline-symbols
       nerd-fonts.symbols-only
       nerd-fonts.jetbrains-mono
+      nerd-fonts.mononoki
     ];
 
     fontconfig.defaultFonts = let

@@ -1,11 +1,15 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  lib,
+  ...
+}: {
   boot = {
     initrd = {
       systemd.enable = true;
       supportedFilesystems = ["ext4" "btrfs" "ntfs"];
     };
 
-    kernelPackages = pkgs.linuxPackages_latest;
+    # kernelPackages = pkgs.linuxPackages_latest;
 
     consoleLogLevel = 3;
     kernelParams = [
@@ -17,9 +21,15 @@
 
     loader = {
       efi.canTouchEfiVariables = true;
-      systemd-boot.enable = true;
+      systemd-boot = {
+        enable = true;
+        consoleMode = "max";
+      };
     };
 
-    plymouth.enable = true;
+    plymouth = {
+      enable = true;
+      # theme = lib.mkDefault "breeze";
+    };
   };
 }

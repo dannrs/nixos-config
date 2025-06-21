@@ -8,7 +8,6 @@
     (config.lib.stylix.colors.withHashtag)
     base01
     base08
-    base09
     base0E
     ;
   bgImageSection = name: ''
@@ -63,7 +62,7 @@ in {
 
       button {
         color: ${base08};
-        background: alpha(${base01}, 0.8);
+        background: alpha(${base01}, 0.85);
         outline-style: none;
         border: none;
         border-radius: 0px;
@@ -75,7 +74,7 @@ in {
       }
 
       button:hover, button:focus {
-        background-color: alpha(${base0E}, 0.8);
+        background-color: alpha(${base0E}, 0.85);
         background-size: 30%;
         animation: gradient_f 20s ease-in infinite;
         transition: all 0.3s cubic-bezier(.55,0.0,.28,1.682);

@@ -10,5 +10,6 @@
     ./polkit.nix
     ./services.nix
     ./steam.nix
+    ./stylix.nix
   ];
 }

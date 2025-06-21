@@ -31,10 +31,10 @@
       "image/png" = ["imv.desktop"];
       "image/gif" = ["imv.desktop"];
       "image/svg+xml" = ["imv.desktop"];
-      "image/webp" = ["firefox.desktop"];
+      "image/webp" = ["zen-twilight.desktop" "firefox.desktop"];
 
       # Default document viewer
-      "application/pdf" = ["firefox.desktop"];
+      "application/pdf" = ["zen-twilight.desktop" "firefox.desktop"];
 
       # Default video player
       "video/mp4" = ["mpv.desktop "];
@@ -43,8 +43,8 @@
       "video/quicktime" = ["mpv.desktop "];
 
       # Default browser
-      "x-scheme-handler/http" = ["zen.desktop" "firefox.desktop"];
-      "x-scheme-handler/https" = ["zen.desktop" "firefox.desktop"];
+      "x-scheme-handler/http" = ["zen-twilight.desktop" "firefox.desktop"];
+      "x-scheme-handler/https" = ["zen-twilight.desktop" "firefox.desktop"];
     };
   };
 

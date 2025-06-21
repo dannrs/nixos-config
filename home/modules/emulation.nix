@@ -1,15 +1,17 @@
 {pkgs, ...}: {
   home.packages = with pkgs; [
     #emulationstation-de
-    retroarch-full
+    #retroarch-full
+    dolphin-emu
     pcsx2
-    # (retroarch.withCores (cores: with cores; [
-    #   beetle-psx
-    #   dolphin
-    #   mesen
-    #   mgba
-    #   snes9x
-    # ]))
+    (retroarch.withCores (cores:
+      with cores; [
+        beetle-psx
+        dolphin
+        mesen
+        mgba
+        snes9x
+      ]))
   ];
 
   home.file = {

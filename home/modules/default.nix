@@ -14,6 +14,7 @@
     ./nvim
     ./mako.nix
     ./rofi.nix
+    ./spotify.nix
     ./starship.nix
     ./stylix.nix
     ./swappy.nix

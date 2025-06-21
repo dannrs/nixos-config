@@ -151,7 +151,7 @@ in {
       }
 
       window#waybar {
-          background: alpha(${base00}, 0.8);
+          background: alpha(${base00}, 0.95);
           color: ${base04};
           border-radius: 18px;
       }

@@ -36,8 +36,10 @@
       # Display lazygit
       bind -r g display-popup -d '#{pane_current_path}' -w80% -h80% -E lazygit
 
-      # TokyoNight colors by Folke
-      # https://github.com/folke/tokyonight.nvim/tree/main/extras/tmux
+      #!/usr/bin/env bash
+
+      # TokyoNight colors for Tmux
+
       set -g mode-style "fg=#7aa2f7,bg=#3b4261"
 
       set -g message-style "fg=#7aa2f7,bg=#3b4261"
@@ -60,11 +62,15 @@
       set -g status-left "#[fg=#15161e,bg=#7aa2f7,bold] #S "
       set -g status-right "#[fg=#7aa2f7,bg=#3b4261] #(echo '#{pane_current_path}' | sed 's#$HOME#~#; s#\\([^/]*/[^/]*/\\).*\\(/[^/]*/.*\\)$#\\1...\\2#; s#/#/#g') #[fg=#15161e,bg=#7aa2f7,bold] #(whoami)@#h "
 
-      setw -g window-status-activity-style "underscore,fg=#a9b1d6,bg=#16161e"
+      setw -g window-status-activity-style "underscore,fg=#a9b1d6,bg=default"
       setw -g window-status-separator ""
-      setw -g window-status-style "NONE,fg=#a9b1d6,bg=#16161e"
+      setw -g window-status-style "NONE,fg=#a9b1d6,bg=default"
       setw -g window-status-format "#[fg=#16161e,bg=#16161e,nobold,nounderscore,noitalics]#[default] #I  #W #F "
       setw -g window-status-current-format "#[fg=#16161e,bg=#3b4261,nobold,nounderscore,noitalics]#[fg=#7aa2f7,bg=#3b4261,bold] #I  #W #F "
+
+      # tmux-plugins/tmux-prefix-highlight support
+      set -g @prefix_highlight_output_prefix "#[fg=#e0af68]#[bg=default]"
+      set -g @prefix_highlight_output_suffix ""
     '';
   };
 }
